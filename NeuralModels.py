@@ -49,18 +49,16 @@ class DAGNN(nn.Module):
 
         # Store other attributes
         self.activation=nn.ReLU()
-        self.layers = layers
+        # self.layers = layers
         self.layer_connections = layer_connections
-        self.connection_masks = connection_masks
-
+        # self.connection_masks = connection_masks
+    
+    
     def forward(self, x):
-        # Initialize the output with the input
-        layer_output={}
-        layer_output[0]=x
-        # layered_connections are sorted starting from layer 1!
-        for k,v in self.layer_connections.items():
-          out_sum=0
-          for v_ in v:
-            out_sum+=self.module_dict[f"{v_}_{k}"](layer_output[v_])
-          layer_output[k]=self.activation(out_sum)
-        return layer_output[len(self.layers)-1]
+        layer_output = [x]  
+
+        for k, v in self.layer_connections.items():
+            out_sum = sum(self.module_dict[f"{v_}_{k}"](layer_output[v_]) for v_ in v)
+            layer_output.append(self.activation(out_sum)) # Append output to the list
+
+        return layer_output[-1] # Return the output of the last layer
