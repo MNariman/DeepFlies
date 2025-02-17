@@ -50,9 +50,10 @@ robust_input_guesses = input_like[
 # Get the input nodes that are actually in the graph G
 input_nodes = set(robust_input_guesses['bodyId']) & set(G.nodes())
 
-# instantiate GraphProcessor
+# instantiate GraphProcessor to remove cycles and compute layers of the resulting DAG and layer-wise connection masks.
 GP=GraphProcessor(G)
 GP.process_graph(input_nodes)
+# use the GP to create a torch model out of the graph.
 fly_brain=EfficientDAGNN(GP.layers,GP.layer_connections,GP.connection_masks)
 fly_brain(torch.randn(1,len(GP.layers[0])))
 # test the model with benchmark datasets below.
