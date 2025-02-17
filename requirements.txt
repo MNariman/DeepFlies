@@ -1,0 +1,10 @@
+Python: 3.11.11 (main, Dec  4 2024, 08:55:07) [GCC 11.4.0]
+collections: part of the Python standard library
+networkx: 3.4.2
+numpy: 1.26.4
+random: part of the Python standard library
+torch: 2.5.1+cu124
+math: part of the Python standard library
+gzip: part of the Python standard library
+pandas: 2.2.2
+re: part of the Python standard library
