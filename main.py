@@ -2,6 +2,7 @@ import gzip
 import pandas as pd
 from GraphProcessor import *
 from NeuralModels import *
+import networkx as nx
 
 with gzip.open("traced-roi-connections.csv.gz", "rt") as f:
     df = pd.read_csv(f)
